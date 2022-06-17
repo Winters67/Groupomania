@@ -20,6 +20,7 @@
     "multer": "^2.0.0-rc.1",
     "node": "^15.4.0",
     "nodemon": "^2.0.16",
+    "react-router-dom": "^6.3.0",
     "validator": "^13.7.0"
   }
 }
