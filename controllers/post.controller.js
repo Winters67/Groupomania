@@ -14,11 +14,6 @@ module.exports.readPost = (req, res) => {
     })
     .sort({ createdAt: -1 });
 };
-const MIME_TYPES = {
-  "image/jpg": "jpg",
-  "image/jpeg": "jpg",
-  "image/png": "png",
-};
 
 module.exports.createPost = async (req, res) => {
   let fileName;
