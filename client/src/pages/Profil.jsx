@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Log from '../components/log'
-import { UidContext } from "../components/AppContex";
+import { UidContext } from "../components/AppContext";
 
 const Profil = () => {
   const uid = useContext(UidContext);
