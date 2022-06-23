@@ -1,6 +1,6 @@
 import axios from "axios";
 
-//post
+//posts
 export const GET_POSTS = "GET_POSTS";
 
 
