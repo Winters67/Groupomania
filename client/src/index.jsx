@@ -9,6 +9,7 @@ import rootReducer from "./reducers";
 
 // dev tools
 import { composeWithDevTools } from "redux-devtools-extension";
+import { getUsers } from "./actions/users.actions";
 
 
 const store = createStore(
@@ -16,6 +17,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 );
 
+store.dispatch(getUsers())
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
