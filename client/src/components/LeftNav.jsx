@@ -6,15 +6,16 @@ const LeftNav = () => {
         <div className="left-nav-container">
             <div className="icons">
                 <div className="icons-bis">
-                    <NavLink to='/' exact activeClassName="active-left-nav">
+
+                    <NavLink to="/" className={({ isActive }) => (isActive ? "active-left-nav" : 'none')}>Home
                         <img src="./img/icons/home.svg" alt="home" />
                     </NavLink>
                     <br />
-                    <NavLink to='/trending' exact activeClassName="active-left-nav">
+                    <NavLink to="/trending" className={({ isActive }) => (isActive ? "active-left-nav" : 'none')}>trending
                         <img src="./img/icons/rocket.svg" alt="home" />
                     </NavLink>
                     <br />
-                    <NavLink to='/profil' exact activeClassName="active-left-nav">
+                    <NavLink to="/profil" className={({ isActive }) => (isActive ? "active-left-nav" : 'none')}>Profil
                         <img src="./img/icons/user.svg" alt="home" />
                     </NavLink>
                 </div>
