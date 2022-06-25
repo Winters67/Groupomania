@@ -1,28 +1,25 @@
-import React from 'react';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateBio } from '../../actions/user.actions';
-import LeftNav from '../LeftNav';
-import { dateParser } from '../Utils';
+import React, { useState } from "react";
+import LeftNav from "../LeftNav";
+import { useDispatch, useSelector } from "react-redux";
 import UploadImg from "./Uploadimg";
+import { updateBio } from "../../actions/user.actions";
+import { dateParser } from "../Utils";
 import FollowHandler from "./FollowHandlers";
 
 const UpdateProfil = () => {
-    const [bio, setBio] = useState('');
+    const [bio, setBio] = useState("");
     const [updateForm, setUpdateForm] = useState(false);
     const userData = useSelector((state) => state.userReducer);
     const usersData = useSelector((state) => state.usersReducer);
-
-    const dispatch = useDispatch()
+    const error = useSelector((state) => state.errorReducer.userError);
+    const dispatch = useDispatch();
     const [followingPopup, setFollowingPopup] = useState(false);
     const [followersPopup, setFollowersPopup] = useState(false);
-
 
     const handleUpdate = () => {
         dispatch(updateBio(userData._id, bio));
         setUpdateForm(false);
-
-    }
+    };
 
     return (
         <div className="profil-container">
@@ -33,6 +30,8 @@ const UpdateProfil = () => {
                     <h3>Photo de profil</h3>
                     <img src={userData.picture} alt="user-pic" />
                     <UploadImg />
+                    <p>{error.maxSize}</p>
+                    <p>{error.format}</p>
                 </div>
                 <div className="right-part">
                     <div className="bio-update">
@@ -56,7 +55,7 @@ const UpdateProfil = () => {
                             </>
                         )}
                     </div>
-                    <h4>Membre depuis le : {dateParser(userData.createdAt)} </h4>
+                    <h4>Membre depuis le : {dateParser(userData.createdAt)}</h4>
                     <h5 onClick={() => setFollowingPopup(true)}>
                         Abonnements : {userData.following ? userData.following.length : ""}
                     </h5>
