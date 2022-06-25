@@ -1,4 +1,5 @@
 const postModel = require("../models/post.model");
+const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
 const { uploadErrors } = require("../utils/errors.utils");
 const ObjectID = require("mongoose").Types.ObjectId;
@@ -7,12 +8,10 @@ const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
 
 module.exports.readPost = (req, res) => {
-  postModel
-    .find((err, docs) => {
-      if (!err) res.send(docs);
-      else console.log("Error to get data : " + err);
-    })
-    .sort({ createdAt: -1 });
+  PostModel.find((err, docs) => {
+    if (!err) res.send(docs);
+    else console.log("Error to get data : " + err);
+  }).sort({ createdAt: -1 });
 };
 
 module.exports.createPost = async (req, res) => {
@@ -24,13 +23,10 @@ module.exports.createPost = async (req, res) => {
         req.file.detectedMimeType != "image/jpg" &&
         req.file.detectedMimeType != "image/png" &&
         req.file.detectedMimeType != "image/jpeg"
-      ) {
+      )
         throw Error("invalid file");
-      }
 
-      if (req.file.size > 500000) {
-        throw Error("max size");
-      }
+      if (req.file.size > 500000) throw Error("max size");
     } catch (err) {
       const errors = uploadErrors(err);
       return res.status(201).json({ errors });
@@ -101,22 +97,20 @@ module.exports.likePost = async (req, res) => {
       {
         $addToSet: { likers: req.body.id },
       },
-      { new: true },
-      (err, docs) => {
-        if (err) return res.status(400).send(err);
-      }
-    );
+      { new: true }
+    )
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send({ message: err }));
+
     await UserModel.findByIdAndUpdate(
       req.body.id,
       {
         $addToSet: { likes: req.params.id },
       },
-      { new: true },
-      (err, docs) => {
-        if (!err) res.send(docs);
-        else return res.status(400).send(err);
-      }
-    );
+      { new: true }
+    )
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -132,22 +126,20 @@ module.exports.unlikePost = async (req, res) => {
       {
         $pull: { likers: req.body.id },
       },
-      { new: true },
-      (err, docs) => {
-        if (err) return res.status(400).send(err);
-      }
-    );
+      { new: true }
+    )
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send({ message: err }));
+
     await UserModel.findByIdAndUpdate(
       req.body.id,
       {
         $pull: { likes: req.params.id },
       },
-      { new: true },
-      (err, docs) => {
-        if (!err) res.send(docs);
-        else return res.status(400).send(err);
-      }
-    );
+      { new: true }
+    )
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -170,12 +162,10 @@ module.exports.commentPost = (req, res) => {
           },
         },
       },
-      { new: true },
-      (err, docs) => {
-        if (!err) return res.send(docs);
-        else return res.status(400).send(err);
-      }
-    );
+      { new: true }
+    )
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {
     return res.status(400).send(err);
   }
@@ -218,12 +208,10 @@ module.exports.deleteCommentPost = (req, res) => {
           },
         },
       },
-      { new: true },
-      (err, docs) => {
-        if (!err) return res.send(docs);
-        else return res.status(400).send(err);
-      }
-    );
+      { new: true }
+    )
+      .then((data) => res.send(data))
+      .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {
     return res.status(400).send(err);
   }

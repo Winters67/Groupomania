@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-
     email: {
       type: String,
       required: true,
@@ -21,7 +20,6 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-
     password: {
       type: String,
       required: true,
@@ -32,7 +30,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "./uploads/profil/random-user.png",
     },
-
     bio: {
       type: String,
       max: 1024,
@@ -52,7 +49,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Cryptage du mot de passe
+// play function before save into display: 'block',
 userSchema.pre("save", async function (next) {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);

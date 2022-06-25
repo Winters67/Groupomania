@@ -5,9 +5,10 @@ import "./styles/index.scss";
 import { Provider } from "react-redux";
 import { configureStore } from '@reduxjs/toolkit'
 import { getUsers } from "./actions/users.actions";
+import { getPosts } from "./actions/post.actions";
 import { BrowserRouter } from "react-router-dom";
 import rootReducer from './reducers'
-import { getPosts } from "./actions/post.actions";
+
 
 
 

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import LeftNav from "../LeftNav";
 import { useDispatch, useSelector } from "react-redux";
-import UploadImg from "./Uploadimg";
+import UploadImg from "./UploadImg";
 import { updateBio } from "../../actions/user.actions";
 import { dateParser } from "../Utils";
-import FollowHandler from "./FollowHandlers";
+import FollowHandler from "./FollowHandler";
 
 const UpdateProfil = () => {
     const [bio, setBio] = useState("");
