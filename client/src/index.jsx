@@ -10,10 +10,6 @@ import { BrowserRouter } from "react-router-dom";
 import rootReducer from './reducers'
 
 
-
-
-
-
 const store = configureStore({ reducer: rootReducer })
 
 
