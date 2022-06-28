@@ -1,7 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useContext, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteComment, editComment } from "../../actions/post.actions";
 import { UidContext } from "../AppContext";
+
+
+
 
 const EditDeleteComment = ({ comment, postId }) => {
     const [isAdmin, setIsAdmin] = useState(false)
@@ -10,6 +13,7 @@ const EditDeleteComment = ({ comment, postId }) => {
     const [text, setText] = useState("");
     const uid = useContext(UidContext);
     const dispatch = useDispatch();
+    const userData = useSelector((state) => state.userReducer);
 
     const handleEdit = (e) => {
         e.preventDefault();
@@ -25,21 +29,25 @@ const EditDeleteComment = ({ comment, postId }) => {
 
     useEffect(() => {
         const checkAuthor = () => {
-            if (uid === comment.commenterId) {
-                setIsAuthor(true) || setIsAdmin(true);
+            if ((uid === comment.commenterId) || userData.isAdmin === true) {
+                setIsAuthor && setIsAdmin(true);
             }
         };
         checkAuthor();
-    }, [uid, comment.commenterId]);
+    }, [uid, comment.commenterId, userData.isAdmin]);
+
+
+
+
 
     return (
         <div className="edit-comment">
-            {isAuthor | isAdmin && edit === false && (
+            {(isAuthor || isAdmin) && edit === false && (
                 <span onClick={() => setEdit(!edit)}>
                     <img src="./img/icons/edit.svg" alt="edit-comment" />
                 </span>
             )}
-            {isAuthor | isAdmin && edit && (
+            {(isAuthor || isAdmin) && edit && (
                 <form action="" onSubmit={handleEdit} className="edit-comment-form">
                     <label htmlFor="text" onClick={() => setEdit(!edit)}>
                         Editer
