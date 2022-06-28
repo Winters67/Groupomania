@@ -4,6 +4,7 @@ import { deleteComment, editComment } from "../../actions/post.actions";
 import { UidContext } from "../AppContext";
 
 const EditDeleteComment = ({ comment, postId }) => {
+    const [isAdmin, setIsAdmin] = useState(false)
     const [isAuthor, setIsAuthor] = useState(false);
     const [edit, setEdit] = useState(false);
     const [text, setText] = useState("");
@@ -25,7 +26,7 @@ const EditDeleteComment = ({ comment, postId }) => {
     useEffect(() => {
         const checkAuthor = () => {
             if (uid === comment.commenterId) {
-                setIsAuthor(true);
+                setIsAuthor(true) || setIsAdmin(true);
             }
         };
         checkAuthor();
@@ -33,12 +34,12 @@ const EditDeleteComment = ({ comment, postId }) => {
 
     return (
         <div className="edit-comment">
-            {isAuthor && edit === false && (
+            {isAuthor | isAdmin && edit === false && (
                 <span onClick={() => setEdit(!edit)}>
                     <img src="./img/icons/edit.svg" alt="edit-comment" />
                 </span>
             )}
-            {isAuthor && edit && (
+            {isAuthor | isAdmin && edit && (
                 <form action="" onSubmit={handleEdit} className="edit-comment-form">
                     <label htmlFor="text" onClick={() => setEdit(!edit)}>
                         Editer

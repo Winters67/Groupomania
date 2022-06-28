@@ -16,6 +16,8 @@ const Card = ({ post }) => {
     const userData = useSelector((state) => state.userReducer);
     const dispatch = useDispatch();
 
+
+
     const updateItem = () => {
         if (textUpdate) {
             dispatch(updatePost(post._id, textUpdate));
@@ -26,6 +28,8 @@ const Card = ({ post }) => {
     useEffect(() => {
         !isEmpty(usersData[0]) && setIsLoading(false);
     }, [usersData]);
+
+
 
     return (
         <li className="card-container" key={post._id}>
@@ -93,14 +97,17 @@ const Card = ({ post }) => {
                                 title={post._id}
                             ></iframe>
                         )}
-                        {userData._id === post.posterId && (
-                            <div className="button-container">
-                                <div onClick={() => setIsUpdated(!isUpdated)}>
-                                    <img src="./img/icons/edit.svg" alt="edit" />
+                        {
+                            (userData._id === post.posterId || userData.isAdmin) && (
+                                <div className="button-container">
+                                    <div onClick={() => setIsUpdated(!isUpdated)}>
+                                        <img src="./img/icons/edit.svg" alt="edit" />
+                                    </div>
+                                    <DeleteCard id={post._id} />
                                 </div>
-                                <DeleteCard id={post._id} />
-                            </div>
-                        )}
+                            )}
+
+
                         <div className="card-footer">
                             <div className="comment-icon">
                                 <img

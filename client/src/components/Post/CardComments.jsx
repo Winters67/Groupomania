@@ -66,7 +66,7 @@ const CardComments = ({ post }) => {
                     </div>
                 );
             })}
-            {userData._id && (
+            {(userData._id || userData.isAdmin) && (
                 <form action="" onSubmit={handleComment} className="comment-form">
                     <input
                         type="text"
