@@ -40,7 +40,7 @@ const FriendsHint = () => {
                 </div>
             ) : (
                 <ul>
-                    {friendsHint.filter((user) => {
+                    {friendsHint.map((user) => {
                         for (let i = 0; i < usersData.length; i++) {
                             if (user === usersData[i]._id) {
 
