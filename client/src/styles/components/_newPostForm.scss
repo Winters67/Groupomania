@@ -45,6 +45,11 @@
     position: relative;
     margin: 0 auto 0;
 
+    .iconEmoji {
+      max-width: 20px;
+      color: $color-1;
+    }
+
     textarea {
       height: 62px;
       width: 100%;

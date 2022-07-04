@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { isEmpty, timestampParser } from "../Utils";
 import { NavLink } from "react-router-dom";
 import { addPost, getPosts } from "../../actions/post.actions";
+import Picker from 'emoji-picker-react';
 
 const NewPostForm = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +14,11 @@ const NewPostForm = () => {
     const userData = useSelector((state) => state.userReducer);
     const error = useSelector((state) => state.errorReducer.postError);
     const dispatch = useDispatch();
+    const [chosenEmoji, setChosenEmoji] = useState(null);
+
+    const onEmojiClick = (event, emojiObject) => {
+        setMessage(emojInput => emojInput + emojiObject.emoji);
+    };
 
     const handlePost = async () => {
         if (message || postPicture || video) {
@@ -96,6 +102,20 @@ const NewPostForm = () => {
                             onChange={(e) => setMessage(e.target.value)}
                             value={message}
                         />
+
+
+                        {/* **********************  emoji ********************** */}
+                        <img className="iconEmoji" src="img\icons\face-smile-regular.svg" alt=""
+                            onClick={() => setChosenEmoji(val => !val)}></img>
+                        {chosenEmoji && <Picker
+                            pickerStyle={{ width: '100%' }}
+                            onEmojiClick={onEmojiClick} />}
+
+
+
+
+
+
                         {message || postPicture || video.length > 20 ? (
                             <li className="card-container">
                                 <div className="card-left">

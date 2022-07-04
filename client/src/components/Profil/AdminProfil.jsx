@@ -16,7 +16,8 @@ const FriendsHint = () => {
             let array = [];
             usersData.map((user) => {
                 if (user._id !== userData._id)
-                    return array.push(user._id);
+                    return array.push(user._id)
+                else return null
 
             });
 
@@ -39,9 +40,10 @@ const FriendsHint = () => {
                 </div>
             ) : (
                 <ul>
-                    {friendsHint.map((user) => {
+                    {friendsHint.filter((user) => {
                         for (let i = 0; i < usersData.length; i++) {
                             if (user === usersData[i]._id) {
+
                                 return (
                                     <li className="user-hint" key={user}>
                                         <img src={usersData[i].picture} alt="user-pic" />
@@ -53,7 +55,9 @@ const FriendsHint = () => {
                                     </li>
                                 );
                             }
+
                         }
+                        return null
                     })}
                 </ul>
             )}
