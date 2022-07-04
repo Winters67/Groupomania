@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { isEmpty } from "../Utils";
-import DeleteUser from "./DeleteUser";
+
 
 
 const FriendsHint = () => {
@@ -47,7 +47,7 @@ const FriendsHint = () => {
                                         <img src={usersData[i].picture} alt="user-pic" />
                                         <p>{usersData[i].pseudo}</p>
                                         <div>
-                                            <DeleteUser />
+
                                         </div>
 
                                     </li>
