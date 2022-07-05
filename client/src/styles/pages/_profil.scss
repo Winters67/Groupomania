@@ -108,11 +108,11 @@
     height: 100%;
 
     img {
-      height: 100%;
-      position: absolute;
-      top: 20 px;
-      bottom: 110px;
-      right: 20px;
+      height: 450px;
+      position: relative;
+      top: 2vh;
+      bottom: 3vh;
+      right: 3vh;
 
       @media screen and(max-width: 1050px) {
         height: 220px;
