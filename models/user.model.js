@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      validate: [isEmail],
+      validate: [isEmail], // validation de l'email
       lowercase: true,
       unique: true,
       trim: true,
@@ -53,11 +53,10 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
-// play function before save into display: 'block',
+// déclaration du model de cryptage du mot de passe
 userSchema.pre("save", async function (next) {
-  const salt = await bcrypt.genSalt();
-  this.password = await bcrypt.hash(this.password, salt);
+  const salt = await bcrypt.genSalt(); //salage du mot de passe
+  this.password = await bcrypt.hash(this.password, salt); // générer le hash du mot de passe
   next();
 });
 

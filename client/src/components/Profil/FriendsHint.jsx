@@ -61,11 +61,13 @@ const FriendsHint = () => {
                                                 idToFollow={usersData[i]._id}
                                                 type={"suggestion"}
                                             />
+
                                         </li>
                                     );
 
                                 }
-                                return null
+
+
                             }
                         })}
                 </ul>

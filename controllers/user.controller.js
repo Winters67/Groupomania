@@ -89,7 +89,6 @@ module.exports.unfollow = (req, res) => {
 
   try {
     UserModel.findByIdAndUpdate(
-      // find the user and update the following array
       req.params.id,
       { $pull: { following: req.body.idToUnfollow } },
       { new: true },
@@ -100,7 +99,6 @@ module.exports.unfollow = (req, res) => {
       }
     );
     UserModel.findByIdAndUpdate(
-      // find the user followed and update his follower array
       req.body.idToUnfollow,
       { $pull: { followers: req.params.id } },
       (err, docs) => {

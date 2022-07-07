@@ -4,11 +4,11 @@ const cookieParser = require("cookie-parser");
 const userRoutes = require("./routes/user.routes");
 const postRoutes = require("./routes/post.routes");
 require("dotenv").config({ path: "./config/.env" });
-require("./config/db");
+require("./config/db"); //importation de la base de données
 const { checkUser, requireAuth } = require("./middleware/auth.middleware");
 const cors = require("cors");
 
-const app = express();
+const app = express(); //création de l'application
 
 const corsOptions = {
   origin: process.env.CLIENT_URL,
@@ -22,9 +22,9 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser()); // support cookie
 
-// jwt
+// "jsonwebtoken": "^8.5.1",
 app.get("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id);

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import SignInForm from "./SignInForm";
+
+
 const SignUpForm = () => {
     const [formSubmit, setFormSubmit] = useState(false);
     const [pseudo, setPseudo] = useState("");
@@ -108,14 +110,18 @@ const SignUpForm = () => {
                         value={controlPassword}
                     />
                     <div className="password-confirm error"></div>
-                    <br />
                     <input type="checkbox" id="terms" />
+
+
                     <label htmlFor="terms">
                         J'accepte le{" "}
-                        <a href="/" target="_blank" rel="noopener noreferrer">
+                        <a href="/rules
+                        " target="_blank" rel="noopener noreferrer">
                             réglement du forum
+
                         </a>
                     </label>
+
                     <div className="terms error"></div>
                     <br />
                     <input type="submit" value="Valider inscription" />
