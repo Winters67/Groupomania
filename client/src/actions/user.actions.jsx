@@ -52,15 +52,15 @@ export const updateBio = (userId, bio) => {
     };
 };
 
-export const delete_user = (userId) => {
+export const deleteUser = (userId, userIdToDelete) => {
     return (dispatch) => {
         return axios({
             method: "delete",
-            url: `${process.env.REACT_APP_API_URL}api/user/` + userId,
-            data: { userId },
+            url: `${process.env.REACT_APP_API_URL}api/user/${userId}`,
+            data: { userIdToDelete },
         })
             .then((res) => {
-                dispatch({ type: DELETE_USER, payload: userId });
+                dispatch({ type: DELETE_USER, payload: userIdToDelete });
             })
             .catch((err) => console.log(err));
     };

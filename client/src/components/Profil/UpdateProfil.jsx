@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import LeftNav from "../LeftNav";
 import { useDispatch, useSelector } from "react-redux";
 import UploadImg from "./UploadImg";
 import { updateBio } from "../../actions/user.actions";
 import { dateParser } from "../Utils";
 import FollowHandler from "./FollowHandler";
-import AdminProfil from "./AdminProfil";
+
 
 const UpdateProfil = () => {
     const [bio, setBio] = useState("");
@@ -16,21 +16,13 @@ const UpdateProfil = () => {
     const dispatch = useDispatch();
     const [followingPopup, setFollowingPopup] = useState(false);
     const [followersPopup, setFollowersPopup] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false)
+
 
     const handleUpdate = () => {
         dispatch(updateBio(userData._id, bio));
         setUpdateForm(false);
     };
 
-    useEffect(() => {
-        const checkAdmin = () => {
-            if (userData.isAdmin === true) {
-                setIsAdmin(true);
-            }
-        };
-        checkAdmin();
-    }, [userData.isAdmin]);
 
 
     return (
@@ -75,9 +67,7 @@ const UpdateProfil = () => {
                         Abonnés : {userData.followers ? userData.followers.length : ""}
                     </h5>
                 </div>
-                {(isAdmin === true) ?
-                    < AdminProfil /> : AdminProfil === false
-                }
+
             </div>
             {
                 followingPopup && (

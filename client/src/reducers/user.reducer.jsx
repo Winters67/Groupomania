@@ -15,8 +15,9 @@ export default function userReducer(state = initialState, action) {
     case GET_USER:
       return action.payload;
     case DELETE_USER:
-      return action.payload;
+      return state.filter(user => user.id !== action.userIdToDelete);
     case UPLOAD_PICTURE:
+      console.log(state)
       return {
         ...state,
         picture: action.payload,
