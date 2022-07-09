@@ -16,7 +16,7 @@ module.exports.readPost = (req, res) => {
 
 module.exports.createPost = async (req, res) => {
   let fileName;
-
+  // type de fichier accepter
   if (req.file !== null) {
     try {
       if (
@@ -25,7 +25,7 @@ module.exports.createPost = async (req, res) => {
         req.file.detectedMimeType != "image/jpeg"
       )
         throw Error("invalid file");
-
+      // taille de photo
       if (req.file.size > 500000) throw Error("max size");
     } catch (err) {
       const errors = uploadErrors(err);
