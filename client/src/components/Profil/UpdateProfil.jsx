@@ -5,10 +5,11 @@ import UploadImg from "./UploadImg";
 import { updateBio } from "../../actions/user.actions";
 import { dateParser } from "../Utils";
 import FollowHandler from "./FollowHandler";
-
+import { deleteUser } from "../../actions/user.actions";
 
 const UpdateProfil = () => {
     const [bio, setBio] = useState("");
+    const [userIdToDelete, setuserIdToDelete] = useState("");
     const [updateForm, setUpdateForm] = useState(false);
     const userData = useSelector((state) => state.userReducer);
     const usersData = useSelector((state) => state.usersReducer);
@@ -23,6 +24,10 @@ const UpdateProfil = () => {
         setUpdateForm(false);
     };
 
+    const handleDelete = () => {
+        dispatch(deleteUser(userData._id, userIdToDelete));
+        Location.reload()
+    };
 
 
     return (
@@ -67,7 +72,14 @@ const UpdateProfil = () => {
                         Abonnés : {userData.followers ? userData.followers.length : ""}
                     </h5>
                 </div>
+                <button onClick={() => {
+                    window.location.reload()
+                    if (window.confirm("Voulez-vous supprimer ce profil , la suppression est definitive ?")) {
+                        window.location.reload()
+                        handleDelete()
+                    }
 
+                }}>supprimer le compte</button>
             </div>
             {
                 followingPopup && (
@@ -88,6 +100,8 @@ const UpdateProfil = () => {
                                                     <div className="follow-handler">
                                                         <FollowHandler idToFollow={user._id} type={'suggestion'} />
                                                     </div>
+
+
                                                 </li>
                                             );
                                         }
