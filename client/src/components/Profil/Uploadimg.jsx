@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uploadPicture } from "../../actions/user.actions";
 
-// uploadinf
+// uploadin
+// uploadin
+// uploadin
+// uploadin
+
 const UploadImg = () => {
     const [file, setFile] = useState();
     const dispatch = useDispatch();
@@ -17,7 +21,7 @@ const UploadImg = () => {
 
         dispatch(uploadPicture(data, userData._id));
     };
-
+    // fsf
     return (
         <form action="" onSubmit={handlePicture} className="upload-pic">
             <label htmlFor="file">Changer d'image</label>
