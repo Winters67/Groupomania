@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LeftNav from "../LeftNav";
 import { useDispatch, useSelector } from "react-redux";
-import UploadImg from "./UploadImg";
+import Uploadimg from "./Uploadimg";
 import { updateBio } from "../../actions/user.actions";
 import { dateParser } from "../Utils";
 import FollowHandler from "./FollowHandler";
@@ -38,7 +38,7 @@ const UpdateProfil = () => {
                 <div className="left-part">
                     <h3>Photo de profil</h3>
                     <img src={userData.picture} alt="user-pic" />
-                    <UploadImg />
+                    <Uploadimg />
                     <p>{error.maxSize}</p>
                     <p>{error.format}</p>
                 </div>
