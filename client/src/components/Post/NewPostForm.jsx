@@ -19,15 +19,16 @@ const NewPostForm = () => {
     const onEmojiClick = (event, emojiObject) => {
         setMessage(emojInput => emojInput + emojiObject.emoji);
     };
-
+    // logique de post message 
     const handlePost = async () => {
         if (message || postPicture || video) {
             const data = new FormData();
+            // recuperation du back 
             data.append('posterId', userData._id);
             data.append('message', message);
             if (file) data.append("file", file);
             data.append('video', video);
-
+            // envoie au back-end
             await dispatch(addPost(data));
             dispatch(getPosts());
             cancelPost();
@@ -35,9 +36,10 @@ const NewPostForm = () => {
             alert("Veuillez entrer un message")
         }
     };
-
+    // affiche la photo en previualisation 
     const handlePicture = (e) => {
         setPostPicture(URL.createObjectURL(e.target.files[0]));
+        //  envoie en  bd
         setFile(e.target.files[0]);
         setVideo('');
     };
@@ -49,7 +51,7 @@ const NewPostForm = () => {
         setFile("");
     };
 
-
+    // test les message du post pour detecter les videos youtube
     useEffect(() => {
         if (!isEmpty(userData)) setIsLoading(false);
 
@@ -62,7 +64,8 @@ const NewPostForm = () => {
                 ) {
                     let embed = findLink[i].replace("watch?v=", "embed/");
                     setVideo(embed.split("&")[0]);
-                    findLink.splice(i, 1);
+                    // supprime le lien youtube
+                    // findLink.splice(i, 1);
                     setMessage(findLink.join(" "));
                     setPostPicture('');
                 }
@@ -98,7 +101,7 @@ const NewPostForm = () => {
                         <textarea
                             name="message"
                             id="message"
-                            placeholder="Quoi de neuf ?"
+                            placeholder="votre message ?"
                             onChange={(e) => setMessage(e.target.value)}
                             value={message}
                         />

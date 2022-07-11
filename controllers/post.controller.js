@@ -7,13 +7,16 @@ const fs = require("fs");
 const { promisify } = require("util");
 const pipeline = promisify(require("stream").pipeline);
 
+// affiche les posts /get
 module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
     if (!err) res.send(docs);
     else console.log("Error to get data : " + err);
+    // affiche les post les plus recents au plus anciens
   }).sort({ createdAt: -1 });
 };
 
+// créer un post
 module.exports.createPost = async (req, res) => {
   let fileName;
   // type de fichier accepter
@@ -58,6 +61,7 @@ module.exports.createPost = async (req, res) => {
   }
 };
 
+//  modifier un post
 module.exports.updatePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -77,6 +81,7 @@ module.exports.updatePost = (req, res) => {
   );
 };
 
+//  effacer un post
 module.exports.deletePost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -116,6 +121,7 @@ module.exports.likePost = async (req, res) => {
   }
 };
 
+// like un post
 module.exports.unlikePost = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -145,6 +151,7 @@ module.exports.unlikePost = async (req, res) => {
   }
 };
 
+// commentaire des  post
 module.exports.commentPost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -171,6 +178,7 @@ module.exports.commentPost = (req, res) => {
   }
 };
 
+// editer le commentaire
 module.exports.editCommentPost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
@@ -193,6 +201,8 @@ module.exports.editCommentPost = (req, res) => {
     return res;
   }
 };
+
+// effacer le commentaire
 
 module.exports.deleteCommentPost = (req, res) => {
   if (!ObjectID.isValid(req.params.id))

@@ -7,6 +7,7 @@ import { likePost, unlikePost } from "../../actions/post.actions";
 
 const LikeButton = ({ post }) => {
     const [liked, setLiked] = useState(false);
+    // recupere l'id de l'utilisateur 
     const uid = useContext(UidContext);
     const dispatch = useDispatch();
 
@@ -20,11 +21,13 @@ const LikeButton = ({ post }) => {
         setLiked(false);
     };
 
+    // 
     useEffect(() => {
         if (post.likers.includes(uid)) setLiked(true);
         else setLiked(false);
     }, [uid, post.likers, liked]);
 
+    //  test si l'id est connecter sinon renvoie la modal 
     return (
         <div className="like-container">
             {uid === null && (

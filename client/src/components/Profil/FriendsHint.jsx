@@ -13,23 +13,14 @@ const FriendsHint = () => {
     useEffect(() => {
         const notFriendList = () => {
             let array = [];
+            // test l'utilisateur suivie  et exclue son id
             usersData.map((user) => {
                 if (user._id !== userData._id && !user.followers.includes(userData._id))
                     return array.push(user._id);
                 else return null
             });
+
             array.sort(() => 0.5 - Math.random());
-            if (window.innerHeight > 780) {
-                array.length = 5;
-            } else if (window.innerHeight > 720) {
-                array.length = 4;
-            } else if (window.innerHeight > 615) {
-                array.length = 3;
-            } else if (window.innerHeight > 540) {
-                array.length = 1;
-            } else {
-                array.length = 0;
-            }
             setFriendsHint(array);
         };
 
